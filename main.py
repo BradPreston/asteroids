@@ -18,14 +18,17 @@ def main():
         x = SCREEN_WIDTH / 2,
         y = SCREEN_HEIGHT / 2
     )
+    updatable = pygame.sprite.Group(player)
+    drawable = pygame.sprite.Group(player)
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        player.draw(screen)
-        player.update(dt)
+        updatable.update(dt)
+        for d in drawable:
+            d.draw(screen)
         pygame.display.flip()
         timePassedInMS = clock.tick(60)
         dt = timePassedInMS / 1000 # convert MS to seconds
